@@ -1,4 +1,4 @@
-// Recreation of From Time by Drake
+// Recreation of Love Yourz by J Cole
 
 #include <cstdio> // for printing to stdout
 
@@ -307,7 +307,7 @@ public:
         imguiInit();
 
         // Play example sequence. Comment this line to start from scratch
-        playMelody();
+        playFullSong();
         // synthManager.synthSequencer().playSequence("synth1.synthSequence");
         synthManager.synthRecorder().verbose(true);
     }
@@ -409,145 +409,127 @@ public:
         synthManager.synthSequencer().addVoiceFromNow(voice, time, duration);
     }
 
-    // ADDED CODE HERE
-    // void chord(char rootNote, float playTime, float sus, float vol)
-    // {
-    //     const float Bb3 = 233.08;
-    //     const float D4 = 293.66;
-    //     const float F4 = 349.23;
-    //     const float A4 = 440.00;
-    //     const float Eb4 = 311.13;
-    //     const float G4 = 392.00;
-    //     const float Bb4 = 466.16;
-    //     const float D5 = 587.33;
-
-    //     switch (rootNote)
-    //     {
-    //     case 'B': // Bb major 7
-    //         playNote(Bb3, playTime, sus, vol);
-    //         playNote(D4, playTime, sus, vol);
-    //         playNote(F4, playTime, sus, vol);
-    //         playNote(A4, playTime, sus, vol);
-    //         break;
-    //     case 'E': // Eb major 7
-    //         playNote(Eb4, playTime, sus, vol);
-    //         playNote(G4, playTime, sus, vol);
-    //         playNote(Bb4, playTime, sus, vol);
-    //         playNote(D5, playTime, sus, vol);
-    //         break;
-    //     }
-    // }
 
     float timeElapsed(int bpm, float beatsElapsed)
     {
         return (60 * beatsElapsed) / (bpm);
     }
 
-    void chordSequence1(float sequenceStart, int bpm) {
-        float vol = .4;
-        float sus = .05;
-        
-        const float C4 = 261.63;
-        const float B4 = 493.88;
-        const float F4 = 349.23;
-        const float E3 = 164.81;
-        const float G3 = 196.00;
-        const float A3 = 220.00;
-        const float B3 = 246.94;
-        const float D4 = 293.66;
-        const float E4 = 329.63;
-        
-        // E minor chord
-        playNote(E3, sequenceStart, sus, vol);
-        playNote(G3, sequenceStart, sus, vol);
-        playNote(B3, sequenceStart, sus, vol);
+void chordSequence1(float sequenceStart, int bpm) {
+    float vol = .4;
+    float sus = .05;
+    
+    const float C4 = 261.63;
+    const float E4 = 329.63;
+    const float G4 = 392.00;
+    const float A4 = 440.00;
+    const float B4 = 493.88;
 
-        // A minor chord
-        playNote(A3, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
-        playNote(C4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
-        playNote(E4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
+    // C major chord
+    playNote(C4, sequenceStart, sus, vol);
+    playNote(E4, sequenceStart, sus, vol);
+    playNote(G4, sequenceStart, sus, vol);
 
-        // B minor chord
-        playNote(B3, timeElapsed(bpm, 4) + sequenceStart, sus, vol);
-        playNote(D4, timeElapsed(bpm, 4) + sequenceStart, sus, vol);
-        playNote(F4, timeElapsed(bpm, 4) + sequenceStart, sus, vol);
-    }
+    // A minor chord
+    playNote(A4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
+    playNote(C4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
+    playNote(E4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
 
-    void chordSequence2(float sequenceStart, int bpm) {
-        float vol = .4;
-        float sus = .05;
-        
-        const float C4 = 261.63;
-        const float B4 = 493.88;
-        const float F4 = 349.23;
-        const float E3 = 164.81;
-        const float G3 = 196.00;
-        const float A3 = 220.00;
-        const float B3 = 246.94;
-        const float D4 = 293.66;
-        const float E4 = 329.63;
-
-        // E minor chord
-        playNote(E3, sequenceStart, sus, vol);
-        playNote(G3, sequenceStart, sus, vol);
-        playNote(B3, sequenceStart, sus, vol);
-
-        // A minor chord
-        playNote(A3, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
-        playNote(C4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
-        playNote(E4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
-
-        // B minor chord (inverted, D4 as the lowest note)
-        playNote(D4, timeElapsed(bpm, 4) + sequenceStart, sus, vol);
-        playNote(F4, timeElapsed(bpm, 4) + sequenceStart, sus, vol);
-        playNote(B4, timeElapsed(bpm, 4) + sequenceStart, sus, vol);
-    }       
-
-    void melody1(float sequenceStart, int bpm) {
-        float vol = 2;
-        const float A4 = 440.00;
-        const float B4 = 493.88;
-        const float C5 = 523.25;
-        const float D5 = 587.33;
-        const float E5 = 659.25;
-        const float G5 = 783.99;
-        float sus = .05;
-
-        playNote(E5, sequenceStart, sus, vol);
-        playNote(D5, timeElapsed(bpm, 0.5) + sequenceStart, sus, vol);
-        playNote(C5, timeElapsed(bpm, 0.75) + sequenceStart, sus, vol);
-        playNote(B4, timeElapsed(bpm, 1) + sequenceStart, sus, vol);
-        playNote(A4, timeElapsed(bpm, 1.25) + sequenceStart, sus, vol);
-        playNote(G5, timeElapsed(bpm, 1.5) + sequenceStart, sus, vol);
-        playNote(A4, timeElapsed(bpm, 1.75) + sequenceStart, sus, vol);
-        playNote(B4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
-        playNote(C5, timeElapsed(bpm, 2.25) + sequenceStart, sus, vol);
-        playNote(D5, timeElapsed(bpm, 2.5) + sequenceStart, sus, vol);
-        playNote(E5, timeElapsed(bpm, 2.75) + sequenceStart, sus, vol);
-    }
-
-    void melody2(float sequenceStart, int bpm) {
-        float vol = 2;
-        const float A4 = 440.00;
-        const float B4 = 493.88;
-        const float C5 = 523.25;
-        const float D5 = 587.33;
-        const float E5 = 659.25;
-        const float G5 = 783.99;
-        float sus = .05;
-
-        playNote(E5, sequenceStart, sus, vol);
-        playNote(D5, timeElapsed(bpm, 0.5) + sequenceStart, sus, vol);
-        playNote(C5, timeElapsed(bpm, 0.75) + sequenceStart, sus, vol);
-        playNote(B4, timeElapsed(bpm, 1) + sequenceStart, sus, vol);
-        playNote(A4, timeElapsed(bpm, 1.25) + sequenceStart, sus, vol);
-        playNote(G5, timeElapsed(bpm, 1.5) + sequenceStart, sus, vol);
-        playNote(A4, timeElapsed(bpm, 1.75) + sequenceStart, sus, vol);
-        playNote(B4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
-        playNote(C5, timeElapsed(bpm, 2.25) + sequenceStart, sus, vol);
-        playNote(D5, timeElapsed(bpm, 2.5) + sequenceStart, sus, vol);
-        playNote(E5, timeElapsed(bpm, 2.75) + sequenceStart, sus, vol);
+    // G major chord
+    playNote(G4, timeElapsed(bpm, 4) + sequenceStart, sus, vol);
+    playNote(B4, timeElapsed(bpm, 4) + sequenceStart, sus, vol);
+    playNote(E4, timeElapsed(bpm, 4) + sequenceStart, sus, vol);
 }
+
+void chordSequence2(float sequenceStart, int bpm) {
+    float vol = .4;
+    float sus = .05;
+    
+    const float C4 = 261.63;
+    const float E4 = 329.63;
+    const float G4 = 392.00;
+    const float A4 = 440.00;
+    const float B4 = 493.88;
+
+    // C major chord
+    playNote(C4, sequenceStart, sus, vol);
+    playNote(E4, sequenceStart, sus, vol);
+    playNote(G4, sequenceStart, sus, vol);
+
+    // A minor chord
+    playNote(A4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
+    playNote(C4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
+    playNote(E4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
+
+    // G major chord
+    playNote(G4, timeElapsed(bpm, 4) + sequenceStart, sus, vol);
+    playNote(B4, timeElapsed(bpm, 4) + sequenceStart, sus, vol);
+    playNote(E4, timeElapsed(bpm, 4) + sequenceStart, sus, vol);
+}       
+
+void melody1(float sequenceStart, int bpm) {
+    float vol = 2;
+    const float A4 = 440.00;
+    const float B4 = 493.88;
+    const float C5 = 523.25;
+    const float D5 = 587.33;
+    const float E5 = 659.25;
+    float sus = .03;
+    playNote(A4, sequenceStart, sus, vol);
+    playNote(B4, timeElapsed(bpm, 0.5) + sequenceStart, sus, vol);
+    playNote(C5, timeElapsed(bpm, 0.75) + sequenceStart, sus, vol);
+    playNote(D5, timeElapsed(bpm, 1) + sequenceStart, sus, vol);
+    playNote(E5, timeElapsed(bpm, 1.25) + sequenceStart, sus, vol);
+    playNote(E5, timeElapsed(bpm, 1.5) + sequenceStart, sus, vol);
+    playNote(D5, timeElapsed(bpm, 1.75) + sequenceStart, sus, vol);
+    playNote(C5, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
+    playNote(B4, timeElapsed(bpm, 2.25) + sequenceStart, sus, vol);
+    playNote(A4, timeElapsed(bpm, 2.5) + sequenceStart, sus, vol);
+}
+
+void melody2(float sequenceStart, int bpm) {
+    float vol = 2;
+    const float A4 = 440.00;
+    const float B4 = 493.88;
+    const float C5 = 523.25;
+    const float D5 = 587.33;
+    const float E5 = 659.25;
+    float sus = .03;
+
+    playNote(A4, sequenceStart, sus, vol);
+    playNote(B4, timeElapsed(bpm, 0.5) + sequenceStart, sus, vol);
+    playNote(C5, timeElapsed(bpm, 0.75) + sequenceStart, sus, vol);
+    playNote(D5, timeElapsed(bpm, 1) + sequenceStart, sus, vol);
+    playNote(E5, timeElapsed(bpm, 1.25) + sequenceStart, sus, vol);
+    playNote(E5, timeElapsed(bpm, 1.5) + sequenceStart, sus, vol);
+    playNote(D5, timeElapsed(bpm, 1.75) + sequenceStart, sus, vol);
+    playNote(C5, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
+    playNote(B4, timeElapsed(bpm, 2.25) + sequenceStart, sus, vol);
+    playNote(A4, timeElapsed(bpm, 2.5) + sequenceStart, sus, vol);
+}
+
+// Add a new function for a new melody
+    void melody3(float sequenceStart, int bpm) {
+        float vol = 2;
+        const float F4 = 349.23;
+        const float G4 = 392.00;
+        const float A4 = 440.00;
+        const float B4 = 493.88;
+        const float C5 = 523.25;
+        float sus = .03;
+
+        playNote(F4, sequenceStart, sus, vol);
+        playNote(G4, timeElapsed(bpm, 0.5) + sequenceStart, sus, vol);
+        playNote(A4, timeElapsed(bpm, 0.75) + sequenceStart, sus, vol);
+        playNote(B4, timeElapsed(bpm, 1) + sequenceStart, sus, vol);
+        playNote(C5, timeElapsed(bpm, 1.25) + sequenceStart, sus, vol);
+        playNote(C5, timeElapsed(bpm, 1.5) + sequenceStart, sus, vol);
+        playNote(B4, timeElapsed(bpm, 1.75) + sequenceStart, sus, vol);
+        playNote(A4, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
+        playNote(G4, timeElapsed(bpm, 2.25) + sequenceStart, sus, vol);
+        playNote(F4, timeElapsed(bpm, 2.5) + sequenceStart, sus, vol);
+    }
+
 
     void metronome(float sequenceStart, int bpm)
     {
@@ -557,6 +539,13 @@ public:
         }
     }
 
+    void hihatBeat(float sequenceStart, int bpm) {
+    for (int i = 0; i < 8; ++i) {
+        playHihat(timeElapsed(bpm, i * 0.5) + sequenceStart);
+        }
+    }
+
+
     void kickBeat(float sequenceStart, int bpm) {
         playKick(150, sequenceStart);
         playKick(150, timeElapsed(bpm, 1.5) + sequenceStart);
@@ -565,30 +554,108 @@ public:
         playKick(150, timeElapsed(bpm, 3.5) + sequenceStart);
     }
 
-    void playMelody() {
-        int bpm = 60; // Adjust BPM to match the song's tempo
+    void snareBeat(float sequenceStart, int bpm) {
+    float beatDuration = 60.0 / bpm;
 
-        // Play the chord progression and melody for several measures
-        for (int i = 0; i < 4; ++i) {
+    // Play the snare on beats 2 and 4
+    playSnare(sequenceStart + beatDuration);
+    playSnare(sequenceStart + 3 * beatDuration);
+    }
+
+
+    void playBass(float sequenceStart, int bpm) {
+        float vol = 0.3; // Further reduce the bass volume
+        float sus = 0.15; // Shorten the sustain
+        float rel = 0.1; // Add a release parameter to make the notes smoother
+
+        const float E2 = 82.41;
+        const float A2 = 110.00;
+        const float B2 = 123.47;
+        const float C3 = 130.81;
+        const float D3 = 146.83;
+
+        // E minor scale
+        playNote(E2, sequenceStart, sus, vol, rel);
+        playNote(B2, timeElapsed(bpm, 0.75) + sequenceStart, sus, vol, rel);
+        playNote(A2, timeElapsed(bpm, 1.5) + sequenceStart, sus, vol, rel);
+
+        // A minor scale
+        playNote(A2, timeElapsed(bpm, 2) + sequenceStart, sus, vol, rel);
+        playNote(E2, timeElapsed(bpm, 2.75) + sequenceStart, sus, vol, rel);
+        playNote(C3, timeElapsed(bpm, 3.5) + sequenceStart, sus, vol, rel);
+    }
+
+
+    void playEnding(float sequenceStart, int bpm) {
+        float vol = 2;
+        float sus = .05;
+
+        const float C5 = 523.25;
+        const float D5 = 587.33;
+        const float E5 = 659.25;
+        const float G5 = 783.99;
+        const float B5 = 987.77;
+
+        // Play a sequence of notes for the ending
+        playNote(E5, sequenceStart, sus, vol);
+        playNote(G5, timeElapsed(bpm, 0.5) + sequenceStart, sus, vol);
+        playNote(B5, timeElapsed(bpm, 1) + sequenceStart, sus, vol);
+        playNote(C5, timeElapsed(bpm, 1.5) + sequenceStart, sus, vol);
+        playNote(D5, timeElapsed(bpm, 2) + sequenceStart, sus, vol);
+
+        // Play a final chord to signify the end of the piece
+        chordSequence1(timeElapsed(bpm, 2.5) + sequenceStart, bpm);
+    }   
+
+    void playFullSong() {
+        int bpm = 60; 
+
+        for (int i = 0; i < 16; ++i) { 
             float sequenceStart = timeElapsed(bpm, i * 4);
 
             // Play the chords
             chordSequence1(sequenceStart, bpm);
             chordSequence2(timeElapsed(bpm, 2) + sequenceStart, bpm);
 
-            // Play the melody
-            if (i % 2 == 0) {
-            melody1(timeElapsed(bpm, 0.75) + sequenceStart, bpm);
+            // Cycle through the melodies
+            if (i % 4 == 0) {
+                melody1(timeElapsed(bpm, 0.75) + sequenceStart, bpm);
+            } else if (i % 4 == 1) {
+                melody2(timeElapsed(bpm, 0.75) + sequenceStart, bpm);
             } else {
-            melody2(timeElapsed(bpm, 0.75) + sequenceStart, bpm);
+                melody3(timeElapsed(bpm, 0.75) + sequenceStart, bpm); // New melody
             }
 
-            // Add drums (optional)
+            // Add drums
             metronome(16, bpm);
             kickBeat(sequenceStart, bpm);
+            hihatBeat(timeElapsed(bpm, 0.5) + sequenceStart, bpm); 
+
+            // Play the bass
+            playBass(sequenceStart, bpm);
+
+            // Add variation to the second stanza
+            if (i >= 4) {
+                hihatBeat(timeElapsed(bpm, 1) + sequenceStart, bpm);
+                hihatBeat(timeElapsed(bpm, 1.5) + sequenceStart, bpm);
+                snareBeat(timeElapsed(bpm, 2) + sequenceStart, bpm);
             }
+
+            // Add a second ending after the 8th measure to vary the structure
+            if (i == 8 || i == 9 || i == 10 || i == 11) {
+                float midEndingStart = timeElapsed(bpm, 4 * 8);
+                playEnding(midEndingStart, bpm);
+            }
+            
         }
-    };
+
+        // Add ending to signify the completion of the piece
+        float endingStart = timeElapsed(bpm, 4 * 16);
+        playEnding(endingStart, bpm);
+    }
+
+};
+        
 
 int main()
 {
